@@ -1,2 +1,2 @@
-# mitienda
+# tienda
 Tienda de tecnologia
