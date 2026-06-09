@@ -559,8 +559,8 @@ function mostrarAviso(){
  setTimeout(()=>a.remove(),1200);
 }
 function agregarCarrito(nombre,precio,img=''){
- if(!carritoML[nombre]) carritoML[nombre]={nombre,precio,cantidad:0,img};
- carritoML[nombre].cantidad++;
+ if(!carritoML[nombre]) carritoML[nombre]={nombre,precio,cantidad:1,img};
+ carritoML[nombre].cantidad;
  if(img) carritoML[nombre].img=img;
  guardarCarrito(); mostrarAviso();
 }
