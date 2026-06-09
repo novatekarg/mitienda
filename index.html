@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novatek | Todo Tecnologia</title>
+    <!-- Fuente de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Iconos (FontAwesome) --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            --primary-color: #00d2ff; /* Azul Neón */
+            --secondary-color: #3a7bd5; /* Azul Oscuro */
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f4f4;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* Navegación */
+        nav {
+            background: var(--dark-bg);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section (Portada) */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Categorías */
+        .categories {
+            padding: 4rem 10%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 50%;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .cat-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cat-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Productos Destacados */
+        .products {
+            padding: 4rem 10%;
+            background: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        /* Placeholder para imágenes falsas - simula una foto */
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 3rem 10%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-col {
+            margin-bottom: 20px;
+            min-width: 200px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { flex-direction: column; gap: 10px; }
+            .nav-links { margin-top: 10px; }
+            .nav-links a { margin: 0 10px; }
+        }
+    </style>
+
+<style>
+#ver-carrito{
+ box-shadow:0 8px 25px rgba(0,102,255,.35)!important;
+ font-weight:700!important;
+ border-radius:14px!important;
+ transition:.3s!important;
+}
+#ver-carrito:hover{transform:translateY(-2px) scale(1.03);}
+.cantidad-input{
+ width:70px;
+ padding:8px;
+ border-radius:8px;
+ border:1px solid #ccc;
+ text-align:center;
+ margin-right:8px;
+}
+.agregar-pro{
+ background:#0066FF;
+ color:white;
+ border:none;
+ border-radius:10px;
+ padding:10px 14px;
+ cursor:pointer;
+ font-weight:600;
+}
+.agregar-pro:hover{opacity:.9;}
+</style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="logo">NOVATEK | TODO TECNOLOGIA <span></span></div><div class="logo">
+    <img src="iconorayonovatek.png" alt="">
+ 
+</div> 
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </nav>
+      <button id="ver-carrito" style="position:fixed; top:20px; right:20px; z-index:1000; background:#0066FF; color:white; padding:10px 20px; border:none; border-radius:8px; cursor:pointer;">
+   🛒 <span id="contador">0</span>
+</button>
+   <div id="seccion-carrito" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; padding:40px 20px; overflow-y:auto;">
+  <div style="max-width:500px; margin:auto; background:#111; padding:30px; border-radius:12px;">
+    <h2 style="color:white; margin-top:0;">Tu Carrito</h2>
+    <div id="lista-carrito" style="color:#ccc; min-height:100px;"></div>
+    <a id="btn-whatsapp" href="#" target="_blank" style="background:#0066FF; color:white; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block; margin-top:20px; width:100%; text-align:center;">
+      Consultar el total
+    </a>
+    <button onclick="cerrarCarrito()" style="margin-top:10px; background:#333; color:white; padding:10px; border:none; border-radius:6px; width:100%; cursor:pointer;">Cerrar</button>
+  </div>
+</div>
+<script>
+let carrito = [];
+
+function agregarCarrito(nombre, precio) {
+  carrito.push({nombre, precio});
+  document.getElementById('contador').innerText = carrito.length;
+  
+    let aviso=document.createElement('div');
+    aviso.innerText='✅ Agregado con éxito';
+    aviso.style.cssText='position:fixed;top:20px;right:20px;background:#00c853;color:white;padding:10px 18px;border-radius:10px;z-index:99999;font-weight:bold;';
+    document.body.appendChild(aviso);
+    setTimeout(()=>aviso.remove(),1000);
+    
+}
+
+document.getElementById('ver-carrito').onclick = function() {
+  let lista = document.getElementById('lista-carrito');
+  lista.innerHTML = '';
+  
+  if(carrito.length === 0) {
+    lista.innerHTML = '<p>El carrito está vacío</p>';
+    document.getElementById('btn-whatsapp').href = '#';
+  } else {
+    let total = 0;
+    let mensaje = 'Hola, quiero consultar el total de estos productos:%0A%0A';
+    
+    carrito.forEach((item, i) => {
+      lista.innerHTML += `<p>${i+1}. ${item.nombre} - $${item.precio}</p>`;
+      mensaje += `${i+1}. ${item.nombre} - $${item.precio}%0A`;
+      total += item.precio;
+    });
+    
+    mensaje += `%0A%0ATotal: $${total}`;
+    lista.innerHTML += `<hr style="border-color:#333"><p style="color:#0066FF; font-weight:bold;">Total: $${total}</p>`;
+    document.getElementById('btn-whatsapp').href = 'https://wa.me/5493436222806?text=' + mensaje;
+  }
+  
+  document.getElementById('seccion-carrito').style.display = 'block';
+}
+
+function cerrarCarrito() {
+  const carrito = document.getElementById('seccion-carrito');
+  carrito.style.display = 'none';
+  carrito.classList.remove('mostrar');
+}
+</script>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <h1>Todo en tecnologia</h1>
+        <p>Descubre los mejores accesorios tecnológicos para tu día a día. Calidad, estilo y rendimiento en un solo lugar.</p>
+        <a href="#productos" class="btn">Ver Catálogo</a>
+    </section>
+
+    <!-- Categorías -->
+    <section class="categories">
+        <h2 class="section-title">¿Qué buscas?</h2>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <i class="fas fa-headphones"></i>
+                <h3>Audio</h3>
+                <p>Auriculares, Bocinas</p>
+            </div>
+            <div class="cat-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Moviles</h3>
+                <p>Cables, Cargadores, Fundas</p>
+            </div>
+            <div class="cat-card">
+                <i class="fas fa-clock"></i>
+                <h3>Wearables</h3>
+                <p>Smartwatches, Pulseras</p>
+            </div>
+            <div class="cat-card">
+                <i class="fas fa-laptop"></i>
+                <h3>Computación</h3>
+                <p>Mouse, Teclados, Webcam</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos" class="products">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 class="section-title">Productos Destacados</h2>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <!-- Imagen de ejemplo de internet -->
+                    <img src="novatekauriculares.png" alt="Audífonos">
+                </div>
+                <div class="product-info">
+                    <h3>AURICULARES INALÁMBRICO AIR 45</h3>
+                    <span class="price">$12000 ARS</span>
+                    <button class="btn" style="font-size: 0.8rem; padding: 8px 20px;">Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="icononovatek.jpg" alt="Smartwatch">
+                </div>
+                <div class="product-info">
+                    <h3>Smartwatch Serie 7</h3>
+                    <span class="price">$120.00</span>
+                    <button class="btn" style="font-size: 0.8rem; padding: 8px 20px;">Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cargador">
+                </div>
+                <div class="product-info">
+                    <h3>Cargador Rápido 65W</h3>
+                    <span class="price">$11000 ARS</span>
+                    <button class="btn" style="font-size: 0.8rem; padding: 8px 20px;">Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cargador">
+                </div>
+                <div class="product-info">
+                    <h3>Incognito 65W</h3>
+                    <span class="price">$15000 ARS</span>
+                    <button class="btn" style="font-size: 0.8rem; padding: 8px 20px;">Agregar</button>
+                </div>
+</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-col">
+            <h4>Novatek</h4>
+            <p>Tu tienda de confianza para accesorios tecnológicos de última generación.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Enlaces</h4>
+            <ul>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Política de Envíos</a></li
+<script>
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+ document.querySelectorAll('.product-card').forEach(card=>{
+   const info = card.querySelector('.product-info');
+   const nombre = card.querySelector('h3')?.innerText || 'Producto';
+   const precioTxt = card.querySelector('.price')?.innerText || '$0';
+   const precio = parseFloat(precioTxt.replace('$','')) || 0;
+
+   const viejoBtn = info.querySelector('.btn');
+   if(viejoBtn && !info.querySelector('.cantidad-input')){
+
+      const cont = document.createElement('div');
+      cont.style.marginTop='10px';
+
+      cont.innerHTML = `
+        <input type="number" min="1" value="1" class="cantidad-input">
+        <button class="agregar-pro">Agregar</button>
+      `;
+
+      viejoBtn.style.display='none';
+      info.appendChild(cont);
+
+      cont.querySelector('button').addEventListener('click', ()=>{
+         let cant = parseInt(cont.querySelector('input').value) || 1;
+
+         for(let i=0;i<cant;i++){
+            if(typeof agregarCarrito==='function'){
+              agregarCarrito(nombre, precio);
+            }
+         }
+      });
+   }
+ });
+
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('.product-card').forEach(card=>{
+   const info=card.querySelector('.product-info');
+   const nombre=card.querySelector('h3')?.innerText||'Producto';
+
+   const existe=info.querySelector('.btn-consultar');
+   if(!existe){
+      const a=document.createElement('a');
+      a.className='btn-consultar';
+      a.href='https://wa.me/5493436222806?text=Hola,%20consulto%20por%20'+encodeURIComponent(nombre);
+      a.target='_blank';
+      a.innerText='Consultar';
+      a.style.cssText='display:inline-block;margin-top:8px;background:#0066FF;color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;';
+      info.appendChild(a);
+   }
+ });
+});
+</script>
+
+<style>
+.notificacion-carrito{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#00c853;color:#fff;padding:12px 18px;border-radius:12px;z-index:99999;font-weight:700;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+#seccion-carrito.mostrar{display:block!important;animation:cartOpen .25s ease}
+@keyframes cartOpen{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.item-carrito{display:flex;gap:10px;align-items:center;background:#1b1b1b;padding:10px;border-radius:10px;margin-bottom:10px;color:#fff}
+.item-carrito img{width:55px;height:55px;object-fit:cover;border-radius:8px}
+.qty-btn,.del-btn{border:none;border-radius:8px;padding:6px 10px;cursor:pointer}
+</style>
+
+<script>
+let carritoML = JSON.parse(localStorage.getItem('carritoML')||'{}');
+
+function guardarCarrito(){localStorage.setItem('carritoML',JSON.stringify(carritoML));actualizarContador();}
+function actualizarContador(){
+ let c=0; Object.values(carritoML).forEach(p=>c+=p.cantidad);
+ const el=document.getElementById('contador'); if(el) el.innerText=c;
+}
+function mostrarAviso(){
+ const a=document.createElement('div');
+ a.className='notificacion-carrito';
+ a.textContent='✅ Agregado al carrito';
+ document.body.appendChild(a);
+ setTimeout(()=>a.remove(),1200);
+}
+function agregarCarrito(nombre,precio,img=''){
+ if(!carritoML[nombre]) carritoML[nombre]={nombre,precio,cantidad:0,img};
+ carritoML[nombre].cantidad++;
+ if(img) carritoML[nombre].img=img;
+ guardarCarrito(); mostrarAviso();
+}
+function cambiarCantidad(nombre,d){
+ if(!carritoML[nombre]) return;
+ carritoML[nombre].cantidad+=d;
+ if(carritoML[nombre].cantidad<=0) delete carritoML[nombre];
+ guardarCarrito(); renderCarrito();
+}
+function eliminarProducto(nombre){
+ delete carritoML[nombre];
+ guardarCarrito(); renderCarrito();
+}
+function renderCarrito(){
+ const lista=document.getElementById('lista-carrito');
+ const btn=document.getElementById('btn-whatsapp');
+ lista.innerHTML='';
+ let total=0,msg='Hola, quiero consultar:%0A%0A';
+ Object.values(carritoML).forEach(p=>{
+   const sub=p.precio*p.cantidad; total+=sub;
+   msg += `${p.nombre} x${p.cantidad} = $${sub}%0A`;
+   lista.innerHTML += `<div class="item-carrito">
+      <img src="${p.img||''}">
+      <div style="flex:1">
+      <b>${p.nombre}</b><br>
+      Cant: ${p.cantidad} | Subtotal: $${sub}
+      </div>
+      <button class="qty-btn" onclick="cambiarCantidad('${p.nombre}',1)">➕</button>
+      <button class="qty-btn" onclick="cambiarCantidad('${p.nombre}',-1)">➖</button>
+      <button class="del-btn" onclick="eliminarProducto('${p.nombre}')">🗑️</button>
+   </div>`;
+ });
+ lista.innerHTML += `<hr><p style="color:#00d2ff;font-weight:bold">Total: $${total}</p>`;
+ btn.href='https://wa.me/5493436222806?text='+msg+`%0ATotal: $${total}`;
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ actualizarContador();
+ const ver=document.getElementById('ver-carrito');
+ if(ver){
+  ver.onclick=()=>{
+   renderCarrito();
+   document.getElementById('seccion-carrito').classList.add('mostrar');
+  };
+ }
+ document.querySelectorAll('.product-card').forEach(card=>{
+   const nombre=card.querySelector('h3')?.innerText||'Producto';
+   const precio=parseFloat((card.querySelector('.price')?.innerText||'0').replace('$',''));
+   const img=card.querySelector('img')?.src||'';
+   card.querySelectorAll('button').forEach(b=>{
+      if((b.textContent||'').includes('Agregar')){
+        b.onclick=()=>agregarCarrito(nombre,precio,img);
+      }
+   });
+ });
+});
+</script>
